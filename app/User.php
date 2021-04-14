@@ -20,7 +20,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'type', 'github', 'city', 'phone','birthday','otdel_id'
+        'name', 'email', 'password', 'type', 'github', 'city', 'phone', 'birthday', 'post_id'
     ];
 
     /**
@@ -32,16 +32,17 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
- 
-    
 
 
-    public function getJWTIdentifier(){
+
+
+    public function getJWTIdentifier()
+    {
         return $this->getKey();
     }
 
-    public function getJWTCustomClaims(){
+    public function getJWTCustomClaims()
+    {
         return [];
     }
-
 }

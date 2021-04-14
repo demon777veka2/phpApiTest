@@ -24,9 +24,8 @@ class CreateUsersTable extends Migration
             $table->integer('birthday')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->integer('otdel_id')->unsigned();     
-            $table->foreign('otdel_id')->references('id')->on('otdels');
-
+            $table->integer('post_id')->unsigned();     
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 

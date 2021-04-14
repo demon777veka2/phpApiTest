@@ -17,7 +17,7 @@ class RegistrationsController extends Controller
         if (empty($request['city'])) $request['city'] = '';
         if (empty($request['phone'])) $request['phone'] = '';
         if (empty($request['birthday'])) $request['birthday'] = null;
-        if (empty($request['otdel_id'])) $request['otdel_id'] = 1;
+        if (empty($request['post_id'])) $request['post_id'] = 1;
 
         $password = bin2hex(random_bytes(5));
 
@@ -29,7 +29,7 @@ class RegistrationsController extends Controller
             'city' => $request['city'],
             'phone' => $request['phone'],
             'birthday' => $request['birthday'],
-            'otdel_id' => $request['otdel_id'],
+            'post_id' => $request['post_id'],
             'password' => Hash::make($password),
         ]);
 

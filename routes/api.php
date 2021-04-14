@@ -14,25 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-  return $request->user();
-});
-
 Route::get('login', 'Api\Auth\LoginController@loginView');
 Route::post('login', 'Api\Auth\LoginController@login');
 Route::post('registrations', 'Api\Auth\RegistrationsController@registrations');
 
+Route::group(['middleware' => ['auth.jwt']], function () {
+  Route::get('user', 'Api\taskTwo\taskTwoController@user');
+  Route::put('user', 'Api\taskTwo\taskTwoController@userPut');
 
+  Route::get('department', 'Api\taskTwo\taskTwoController@department');
 
-//Route::get('table', 'Api\taskTwo\taskTwoController@table');
-
-//Route::group(['middleware'=> ['jwt.verify']], function(){
-   
-  //  Route::get('table/{id}', 'Api\taskTwo\taskTwoController@tableid');
-    
- //   Route::post('table', 'Api\taskTwo\taskTwoController@tableSave');
-    
- //   Route::put('table/{id}', 'Api\taskTwo\taskTwoController@tableEdit');
-//    Route::delete('table/{id}', 'Api\taskTwo\taskTwoController@tableDelete');
-
-//});
+  Route::get('workers/query/{name}', 'Api\taskTwo\taskTwoController@workersSerchName');
+  Route::get('workers/department_id/{id}', 'Api\taskTwo\taskTwoController@workersSerchIdOtdel');
+  Route::get('workers/position_id/{id}', 'Api\taskTwo\taskTwoController@workersSerchIdPost');
+  Route::get('workers/{id}', 'Api\taskTwo\taskTwoController@workersSerchIdUser');
+});
