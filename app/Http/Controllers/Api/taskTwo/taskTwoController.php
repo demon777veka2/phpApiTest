@@ -49,7 +49,7 @@ class taskTwoController extends Controller
 
         $idUser = JWTAuth::parseToken()->authenticate()->id;
 
-        $info = User::find($idUser);
+        $info = User::where('id', '=', $idUser)->get();
         if (is_null($info)) {
             return response()->json(['error' => true, 'message' => 'Not Found'], 404);
         }
@@ -58,21 +58,31 @@ class taskTwoController extends Controller
 
     public function userPut(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'nullable|unique:users|max:255',
+            'email' => 'nullable|email|unique:users|max:255',
+            'type' => 'nullable',
+            'github' => 'nullable|regex:/github.com([\/A-z]*)/',
+            'city' => 'nullable',
+            'phone' => 'max:11|nullable|regex:/8[0-9]{10}/',
+            'birthday' => 'regex:/[0-9]{4}/|max:4|nullable',
+            'post_id' => 'regex:/[0-9]*/|nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 0, 'error' => true, 'massage' => 'Ошибка ввода данных']);
+        }
+
         if (!$user = JWTAuth::parseToken()->authenticate()) {
             return response()->json(['user_not_found'], 404);
         }
 
         $idUser = JWTAuth::parseToken()->authenticate()->id;
+        $infoUser = User::find($idUser);
 
+        $infoUser->update($request->all());
 
-        $info = User::find($idUser);
-        if (is_null($info)) {
-            return response()->json(['error' => true, 'message' => 'Not Found'], 404);
-        }
-
-        $info->update($request->all());
-
-        return response()->json($info, 200);
+        return response()->json($infoUser, 200);
     }
 
 

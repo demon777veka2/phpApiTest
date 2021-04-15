@@ -20,7 +20,7 @@ Route::post('registrations', 'Api\Auth\RegistrationsController@registrations');
 
 Route::group(['middleware' => ['auth.jwt']], function () {
   Route::get('user', 'Api\taskTwo\taskTwoController@user');
-  Route::put('user', 'Api\taskTwo\taskTwoController@userPut');
+  Route::post('user', 'Api\taskTwo\taskTwoController@userPut');
 
   Route::get('department', 'Api\taskTwo\taskTwoController@department');
 
