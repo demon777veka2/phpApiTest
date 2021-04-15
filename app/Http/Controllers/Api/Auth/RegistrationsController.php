@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Auth;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Otdel;
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -13,6 +15,9 @@ class RegistrationsController extends Controller
 {
     public function registrations(Request $request)
     {
+        //  $classRegistration = new RegistrationsController;
+        // $classRegistration->creatFirstDBdata();
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:users|max:255',
             'email' => 'required|email|unique:users|max:255',
@@ -50,5 +55,32 @@ class RegistrationsController extends Controller
         ]);
 
         return response()->json(['status' => 200, 'password' => $password]);
+    }
+
+    public function creatFirstDBdata()
+    {
+
+        Otdel::create([
+            'name' => 'user'
+        ]);
+
+        Post::create([
+            'name' => 'user',
+            'otdel_id' => '1'
+        ]);
+
+        User::create([
+            'name' => 'user',
+            'email' => 'user@mail.ru',
+            'post_id' => 1,
+            'password' => Hash::make('user'),
+        ]);
+
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@mail.ru',
+            'post_id' => 1,
+            'password' => Hash::make('admin'),
+        ]);
     }
 }

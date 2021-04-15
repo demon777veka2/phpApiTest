@@ -9,6 +9,6 @@ class Post extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name'
+        'name', 'otdel_id'
     ];
 }

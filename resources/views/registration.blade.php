@@ -7,7 +7,7 @@
 
 <div class="container" style=" margin:0 25% 0 25%; width:50%;">
     <div style="color:red">
-    {{ isset($error) ? $error : '' }}
+        {{ isset($error) ? $error : '' }}
     </div></br>
 
     <div class="row">
@@ -27,15 +27,15 @@
                         <i class="fa fa-lock"></i>
                         <a href="#" class="fa fa-question-circle"></a>
                     </div>
-                    
+
                     <div class="form-group help">
                         <input type="password" class="form-control" id="repeat_password" name="repeat_password" placeholder="Repeat password" style="width:200px;">
                         <i class="fa fa-lock"></i>
                         <a href="#" class="fa fa-question-circle"></a>
                     </div>
-                    
+
                     <a href="/registration"><button type="submit" class="btn btn-default">Зарегистрироваться</button></a>
-                    
+
                 </form>
             </div>
         </form>

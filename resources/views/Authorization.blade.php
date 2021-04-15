@@ -5,14 +5,14 @@
 @section('main_content')
 
 
-<div class="container" style=" margin:0 25% 0 25%; width:50%;">
-   <div class="row" >
+<div class="container" style="margin:0 25% 0 25%; width:50%;">
+   <div class="row" style="margin-top:50px;">
 
       <form method="post" action="/api/login">
-       @csrf
+         @csrf
          <div class="col-md-offset-3 col-md-6" style='width:700px'>
-         <div style="color:red">{{ isset($error) ? $error : '' }}</div>
-         
+            <div style="color:red">{{ isset($error) ? $error : '' }}</div>
+
             <form class="form-horizontal">
                <span class="heading">АВТОРИЗАЦИЯ</span>
                <div class="form-group">
@@ -25,13 +25,13 @@
                   <i class="fa fa-lock"></i>
                   <a href="#" class="fa fa-question-circle"></a>
                </div>
-               
-              <a><button type="submit" class="btn btn-default">ВХОД</button> </a>
-               </div>
-            </form>
+
+               <a><button type="submit" class="btn btn-default">ВХОД</button> </a>
          </div>
       </form>
    </div>
+   </form>
+</div>
 </div>
 
 

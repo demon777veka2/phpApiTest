@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\taskTwo;
+namespace App\Http\Controllers\Api\TaskTwo;
 
 use Illuminate\Http\Request;
 use App\User;
@@ -16,7 +16,7 @@ use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class taskTwoController extends Controller
+class TaskTwoController extends Controller
 {
     public function department()
     {
@@ -34,7 +34,7 @@ class taskTwoController extends Controller
             $otdelInfo = Otdel::where('name', '!=', 'admin')->where('name', '!=', 'user')->get();
             return response()->json($otdelInfo, 200);
         }
-        //До тестировать
+
         $myOtdelInfo = Post::where('otdel_id', '=', $otdelId)->get();
         $otdelInfo = Otdel::where('name', '!=', 'admin')->where('name', '!=', 'user')->get();
 

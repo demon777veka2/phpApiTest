@@ -20,27 +20,26 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/taskOne">
-                <ya-tr-span data-index="1-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Home" data-translation="Задание 1" data-type="trSpan">Задание 1</ya-tr-span>
+              <a class="nav-link active" aria-current="page">
+                <ya-tr-span data-index="1-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Home" data-translation="Таблицы:" data-type="trSpan">
+                  <h5>Таблицы:</h5>
+                </ya-tr-span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/taskTwo">
-                <ya-tr-span data-index="2-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="Задание 2" data-type="trSpan">Задание 2</ya-tr-span>
+              <a class="nav-link active" aria-current="page" href="/api/UserTable">
+                <ya-tr-span data-index="1-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Home" data-translation="Пользователь" data-type="trSpan">Пользователь</ya-tr-span>
               </a>
             </li>
-            <li class="nav-item" style="margin-left: 800px; color:white;">
-              {{isset($deleteSession)? Session::flush() : null}}
-              @if(session('login')==null)
-              <div><a>
-                  Noname
-                </a></div>
-              <a href="/loginView"><button>Вход</button> </a>
-              <a href="/registrationView"><button>Регистрация</button> </a>
-              @else
-              Вы: {{session('login')}}
-              <a href="/loginExit"><button>Выход</button> </a>
-              @endif
+            <li class="nav-item">
+              <a class="nav-link active" href="/api/PostTable">
+                <ya-tr-span data-index="2-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="Должность" data-type="trSpan">Должность</ya-tr-span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/api/OtdelTable">
+                <ya-tr-span data-index="2-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="Отдел" data-type="trSpan">Отдел</ya-tr-span>
+              </a>
             </li>
           </ul>
 

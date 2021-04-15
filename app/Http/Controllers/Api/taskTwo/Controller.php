@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\taskTwo;
+namespace App\Http\Controllers\Api\TaskTwo;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -10,7 +10,4 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-
-  
 }
