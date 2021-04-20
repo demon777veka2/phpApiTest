@@ -87,145 +87,145 @@ class TaskTwoController extends Controller
 
     public function workersAll(Request $request)
     {
-        if (!empty($request['query']))
-            return redirect()->action('Api\TaskTwo\TaskTwoController@workersSerchName', ['query' => $request['query']]);
-
-           
-
-            
-    }
-
-    public function workersSerchName($query)
-    {
-        if (!$user = JWTAuth::parseToken()->authenticate()) {
-            return response()->json(['user_not_found'], 404);
-        }
-
-        //Проверка, является ли этот пользователь работником
-        $userId = JWTAuth::parseToken()->authenticate()->id;
-        $postId = User::where('id', '=', $userId)->get('post_id');
-        $postId = preg_replace("/[^0-9]/", '', $postId);
-
-        if ($postId == "1") {
-            return response()->json(['error' => true, 'message' => 'Нет права доступа']);
-        }
-
-        //получения доступа к его данным, сверяя с его должностью
-        $bdcheck = User::where('name', '=', $query)->get()->count() > 0;
-        if ($bdcheck == null)
-            return response()->json(['error' => true, 'message' => 'Not found name']);
-
-        $userIdSerchOtdel = User::where('name', '=', $query)->get('post_id');
-        $userIdSerchOtdel = preg_replace("/[^0-9]/", '', $userIdSerchOtdel);
-
-        $userOtdelId = Post::where('otdel_id', '=', $userIdSerchOtdel)->get('otdel_id');
-        $userOtdelId = preg_replace("/[^0-9]/", '', $userOtdelId);
-
-
-        $myOtdelId = Post::where('id', '=', $postId)->get('otdel_id');
-        $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
-
-        if ($userOtdelId ==  $myOtdelId) {
-            $UserInfo = User::where('name', '=', $query)->get();
-            return response()->json($UserInfo, 200);
-        }
-        return response()->json(['error' => true, 'message' => 'Нет права доступа']);
-    }
-
-    public function workersSerchIdOtdel($id)
-    {
-        if (!$user = JWTAuth::parseToken()->authenticate()) {
-            return response()->json(['user_not_found'], 404);
-        }
-
-        //Проверка, является ли этот пользователь работником
-        $userId = JWTAuth::parseToken()->authenticate()->id;
-        $postId = User::where('id', '=', $userId)->get('post_id');
-        $postId = preg_replace("/[^0-9]/", '', $postId);
-
-        if ($postId == "1") {
-            return response()->json(['error' => true, 'message' => 'Нет права доступа']);
-        }
-
-        //получения доступа к его данным, сверяя с его должностью
-        $bdcheck = Otdel::where('id', '=', $id)->get()->count() > 0;
-        if ($bdcheck == null)
-            return response()->json(['error' => true, 'message' => 'Not found otdel']);
-
-        $myOtdelId = Post::where('id', '=', $postId)->get('otdel_id');
-        $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
-
-        if ($id ==  $myOtdelId) {
-
-            //Вывод информации пользователей с одного отдела
-            $arrayId = array(); //пустой массив для будущих id post
-
-            $ammountPost = Post::get()->count();
-            for ($i = 1; $i <= $ammountPost; $i++) {
-
-                $indexOtdelId = Post::where('id', '=', $i)->get('otdel_id');
-                $indexOtdelId = preg_replace("/[^0-9]/", '', $indexOtdelId);
-
-                if ($myOtdelId == $indexOtdelId) {
-                    $arrayId[] = $i;
-                }
+        //При передаче параметра query
+        if (!empty($request['query'])) {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
             }
 
-            $tableOtdel = array();
-            $ammountUser = User::get()->count();
-            for ($i = 1; $i <= $ammountUser; $i++) {
-                $indexUserId = User::where('id', '=', $i)->get('post_id');
-                $indexUserId = preg_replace("/[^0-9]/", '', $indexUserId);
+            //Проверка, является ли этот пользователь работником
+            $userId = JWTAuth::parseToken()->authenticate()->id;
+            $postId = User::where('id', '=', $userId)->get('post_id');
+            $postId = preg_replace("/[^0-9]/", '', $postId);
 
-                foreach ($arrayId as $value) {
+            if ($postId == "1") {
+                return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+            }
 
-                    if ($indexUserId == $value) {
-                        if ($i == 1) {
-                            $tableOtdel[] = User::where('id', '=', $i)->get();
-                        } else {
-                            $tableOtdel[] =  User::where('id', '=', $i)->get(); //Обьединение записей в 1 таблицу  
+            $name = $request['query'];
+
+            //получения доступа к его данным, сверяя с его должностью
+            $bdcheck = User::where('name', '=', $name)->get()->count() > 0;
+            if ($bdcheck == null)
+                return response()->json(['error' => true, 'message' => 'Not found name']);
+
+            $userIdSerchOtdel = User::where('name', '=', $name)->get('post_id');
+            $userIdSerchOtdel = preg_replace("/[^0-9]/", '', $userIdSerchOtdel);
+
+            $userOtdelId = Post::where('otdel_id', '=', $userIdSerchOtdel)->get('otdel_id');
+            $userOtdelId = preg_replace("/[^0-9]/", '', $userOtdelId);
+
+
+            $myOtdelId = Post::where('id', '=', $postId)->get('otdel_id');
+            $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
+
+            if ($userOtdelId ==  $myOtdelId) {
+                $UserInfo = User::where('name', '=', $name)->get();
+                return response()->json($UserInfo, 200);
+            }
+            return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+        }
+
+        //При передаче параметра query 
+        if (!empty($request['department_id'])) {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+            //Проверка, является ли этот пользователь работником
+            $userId = JWTAuth::parseToken()->authenticate()->id;
+            $postId = User::where('id', '=', $userId)->get('post_id');
+            $postId = preg_replace("/[^0-9]/", '', $postId);
+
+            if ($postId == "1") {
+                return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+            }
+
+            $id = $request['department_id'];
+
+            //получения доступа к его данным, сверяя с его должностью
+            $bdcheck = Otdel::where('id', '=', $id)->get()->count() > 0;
+            if ($bdcheck == null)
+                return response()->json(['error' => true, 'message' => 'Not found otdel']);
+
+            $myOtdelId = Post::where('id', '=', $postId)->get('otdel_id');
+            $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
+
+            if ($id ==  $myOtdelId) {
+
+                //Вывод информации пользователей с одного отдела
+                $arrayId = array(); //пустой массив для будущих id post
+
+                $ammountPost = Post::get()->count();
+                for ($i = 1; $i <= $ammountPost; $i++) {
+
+                    $indexOtdelId = Post::where('id', '=', $i)->get('otdel_id');
+                    $indexOtdelId = preg_replace("/[^0-9]/", '', $indexOtdelId);
+
+                    if ($myOtdelId == $indexOtdelId) {
+                        $arrayId[] = $i;
+                    }
+                }
+
+                $tableOtdel = array();
+                $ammountUser = User::get()->count();
+                for ($i = 1; $i <= $ammountUser; $i++) {
+                    $indexUserId = User::where('id', '=', $i)->get('post_id');
+                    $indexUserId = preg_replace("/[^0-9]/", '', $indexUserId);
+
+                    foreach ($arrayId as $value) {
+
+                        if ($indexUserId == $value) {
+                            if ($i == 1) {
+                                $tableOtdel[] = User::where('id', '=', $i)->get();
+                            } else {
+                                $tableOtdel[] =  User::where('id', '=', $i)->get(); //Обьединение записей в 1 таблицу  
+                            }
                         }
                     }
                 }
+                return response()->json($tableOtdel, 200);
             }
-            return response()->json($tableOtdel, 200);
-        }
-        return response()->json(['error' => true, 'message' => 'Нет права доступа']);
-    }
-
-    public function workersSerchIdPost($id)
-    {
-        if (!$user = JWTAuth::parseToken()->authenticate()) {
-            return response()->json(['user_not_found'], 404);
-        }
-
-        //Проверка, является ли этот пользователь работником
-        $userId = JWTAuth::parseToken()->authenticate()->id;
-        $postId = User::where('id', '=', $userId)->get('post_id');
-        $postId = preg_replace("/[^0-9]/", '', $postId);
-
-        if ($postId == "1") {
             return response()->json(['error' => true, 'message' => 'Нет права доступа']);
         }
 
-        //получения доступа к данным, сверяя с отделом
-        $bdcheck = Post::where('id', '=', $id)->get()->count() > 0;
-        if ($bdcheck == null)
-            return response()->json(['error' => true, 'message' => 'Not found id post']);
+        //При передаче параметра position_id 
+        if (!empty($request['position_id'])) {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
 
-        $requestedPostlId = Post::where('id', '=', $id)->get('otdel_id');
-        $requestedPostlId = preg_replace("/[^0-9]/", '', $requestedPostlId);
+            //Проверка, является ли этот пользователь работником
+            $userId = JWTAuth::parseToken()->authenticate()->id;
+            $postId = User::where('id', '=', $userId)->get('post_id');
+            $postId = preg_replace("/[^0-9]/", '', $postId);
 
-        $myOtdelId = Post::where('id', '=', $postId)->get('otdel_id');
-        $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
+            if ($postId == "1") {
+                return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+            }
 
-        if ($requestedPostlId ==  $myOtdelId) {
-            $UserInfo = User::where('post_id', '=', $id)->get();
-            return response()->json($UserInfo, 200);
+            $id = $request['position_id'];
+
+            //получения доступа к данным, сверяя с отделом
+            $bdcheck = Post::where('id', '=', $id)->get()->count() > 0;
+            if ($bdcheck == null)
+                return response()->json(['error' => true, 'message' => 'Not found id post']);
+
+            $requestedPostlId = Post::where('id', '=', $id)->get('otdel_id');
+            $requestedPostlId = preg_replace("/[^0-9]/", '', $requestedPostlId);
+
+            $myOtdelId = Post::where('id', '=', $postId)->get('otdel_id');
+            $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
+
+            if ($requestedPostlId ==  $myOtdelId) {
+                $UserInfo = User::where('post_id', '=', $id)->get();
+                return response()->json($UserInfo, 200);
+            }
+            return response()->json(['error' => true, 'message' => 'Нет права доступа']);
         }
-        return response()->json(['error' => true, 'message' => 'Нет права доступа1']);
-    }
 
+        return response()->json(['error' => true, 'message' => 'Такого параметра нет']);
+    }
 
     public function workersSerchIdUser($id)
     {

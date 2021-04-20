@@ -23,14 +23,7 @@ Route::group(['middleware' => ['auth.jwt']], function () {
 
   Route::get('department', 'Api\TaskTwo\TaskTwoController@department');
 
-  // Route::group(['prefix' => 'workers'], function () {
-  //   Route::get('query/{name}', 'Api\TaskTwo\TaskTwoController@workersSerchName');
-  //   Route::get('department_id/{id}', 'Api\TaskTwo\TaskTwoController@workersSerchIdOtdel');
-  //   Route::get('position_id/{id}', 'Api\TaskTwo\TaskTwoController@workersSerchIdPost');
-  //   Route::get('{id}', 'Api\taskTwo\TaskTwo@workersSerchIdUser');
-  // });
-
-//  Route::get('workers/{id}', 'Api\taskTwo\TaskTwoController@workersSerchIdUser');
+  Route::get('workers/{id}', 'Api\taskTwo\TaskTwoController@workersSerchIdUser');
   Route::get('workers', 'Api\TaskTwo\TaskTwoController@workersAll');
 
 });

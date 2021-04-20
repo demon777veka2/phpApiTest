@@ -67,7 +67,6 @@ class LoginController extends Controller
         $userId =  User::where('email', '=', $request['email'])->get('id');
         $userId = preg_replace("/[^0-9]/", '', $userId);
 
-
         if ($userId == 2) {
             //заносим инфрормацию о пользователе на сайт
             Session(['userId' => $userId]);
