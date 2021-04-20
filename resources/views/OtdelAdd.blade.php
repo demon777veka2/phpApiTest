@@ -9,7 +9,6 @@
     <div style="color:red">
         {{ isset($error) ? $error : '' }}
     </div></br>
-
     <div class="row">
         <form method="post" action="OtdelTableAdd">
             @csrf

@@ -3,7 +3,6 @@
 @section('title')Должность@endsection
 
 @section('main_content')
-
 <div style="margin:0 auto; width:50%;float:left;  height: 800px; padding-left: 20%">
 
     <div style="margin:40px 0 40px 0">

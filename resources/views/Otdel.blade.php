@@ -11,7 +11,6 @@
             <input class="btn btn-secondary" type="submit" value="Добавить новую запись" name="add">
         </a>
     </div>
-
     <table class="table table-bordered">
         <tr class="cas">
             <td>name</td>

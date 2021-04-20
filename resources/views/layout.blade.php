@@ -27,17 +27,17 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/api/UserTable">
+              <a class="nav-link active" aria-current="page" href="/UserTable">
                 <ya-tr-span data-index="1-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Home" data-translation="Пользователь" data-type="trSpan">Пользователь</ya-tr-span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/api/PostTable">
+              <a class="nav-link active" href="/PostTable">
                 <ya-tr-span data-index="2-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="Должность" data-type="trSpan">Должность</ya-tr-span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/api/OtdelTable">
+              <a class="nav-link active" href="/OtdelTable">
                 <ya-tr-span data-index="2-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="Отдел" data-type="trSpan">Отдел</ya-tr-span>
               </a>
             </li>

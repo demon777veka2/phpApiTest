@@ -4,45 +4,44 @@
 
 @section('main_content')
 
-<div style="margin:0 auto; width:50%;float:left;  height: 800px; padding-left: 20%">
+    <div style="margin:0 auto; width:50%;float:left;  height: 800px; padding-left: 20%">
+    
+        <div style="margin:40px 0 40px 0">
+            <a href="UserTableAdd">
+                <input class="btn btn-secondary" type="submit" value="Добавить новую запись" name="add">
+            </a>
+        </div>
 
-    <div style="margin:40px 0 40px 0">
-        <a href="UserTableAdd">
-            <input class="btn btn-secondary" type="submit" value="Добавить новую запись" name="add">
-        </a>
+        <table class="table table-bordered">
+            <tr class="cas">
+                <td>Никнейм</td>
+                <td>Email</td>
+                <td>type</td>
+                <td>github</td>
+                <td>Город</td>
+                <td>Телефон</td>
+                <td>Год рождения</td>
+                <td>Должность ID</td>
+            </tr>
+
+            @foreach($tableUser as $el)
+            <tr>
+                <td>{{$el->name}}</td>
+                <td>{{$el->email }}</td>
+                <td>{{$el->type}}</td>
+                <td>{{$el->github}}</td>
+                <td>{{$el->city}}</td>
+                <td>{{$el->phone}}</td>
+                <td>{{$el->birthday}}</td>
+                <td>{{$el->post_id }}</td>
+                <td>
+                    <a href='UserTableDelete/{{ $el->id }}'>Удалить</a>
+                </td>
+                <td>
+                    <a href='UserTableEdit/{{ $el->id }}'>Редактировать</a>
+                </td>
+            </tr>
+            @endforeach
+        </table>
     </div>
-
-    <table class="table table-bordered">
-        <tr class="cas">
-            <td>Никнейм</td>
-            <td>Email</td>
-            <td>type</td>
-            <td>github</td>
-            <td>Город</td>
-            <td>Телефон</td>
-            <td>Год рождения</td>
-            <td>Должность ID</td>
-        </tr>
-
-        @foreach($tableUser as $el)
-        <tr>
-            <td>{{$el->name}}</td>
-            <td>{{$el->email }}</td>
-            <td>{{$el->type}}</td>
-            <td>{{$el->github}}</td>
-            <td>{{$el->city}}</td>
-            <td>{{$el->phone}}</td>
-            <td>{{$el->birthday}}</td>
-            <td>{{$el->post_id }}</td>
-            <td>
-                <a href='UserTableDelete/{{ $el->id }}'>Удалить</a>
-            </td>
-            <td>
-                <a href='UserTableEdit/{{ $el->id }}'>Редактировать</a>
-            </td>
-        </tr>
-        @endforeach
-    </table>
-</div>
-
 @endsection

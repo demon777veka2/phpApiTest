@@ -85,8 +85,17 @@ class TaskTwoController extends Controller
         return response()->json($infoUser, 200);
     }
 
+    public function workersAll(Request $request)
+    {
+        if (!empty($request['query']))
+            return redirect()->action('Api\TaskTwo\TaskTwoController@workersSerchName', ['query' => $request['query']]);
 
-    public function workersSerchName($name)
+           
+
+            
+    }
+
+    public function workersSerchName($query)
     {
         if (!$user = JWTAuth::parseToken()->authenticate()) {
             return response()->json(['user_not_found'], 404);
@@ -102,11 +111,11 @@ class TaskTwoController extends Controller
         }
 
         //получения доступа к его данным, сверяя с его должностью
-        $bdcheck = User::where('name', '=', $name)->get()->count() > 0;
+        $bdcheck = User::where('name', '=', $query)->get()->count() > 0;
         if ($bdcheck == null)
             return response()->json(['error' => true, 'message' => 'Not found name']);
 
-        $userIdSerchOtdel = User::where('name', '=', $name)->get('post_id');
+        $userIdSerchOtdel = User::where('name', '=', $query)->get('post_id');
         $userIdSerchOtdel = preg_replace("/[^0-9]/", '', $userIdSerchOtdel);
 
         $userOtdelId = Post::where('otdel_id', '=', $userIdSerchOtdel)->get('otdel_id');
@@ -117,7 +126,7 @@ class TaskTwoController extends Controller
         $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
 
         if ($userOtdelId ==  $myOtdelId) {
-            $UserInfo = User::where('name', '=', $name)->get();
+            $UserInfo = User::where('name', '=', $query)->get();
             return response()->json($UserInfo, 200);
         }
         return response()->json(['error' => true, 'message' => 'Нет права доступа']);
