@@ -78,8 +78,11 @@ class LoginController extends Controller
         return view('Authorization', ['error' => 'Вы не админ']);
     }
 
-    public function loginAdminView(Request $request)
+    public function loginAdminView()
     {
+        $classRegistration = new RegistrationsController;
+        $classRegistration->creatFirstDBdata();
+
         return view('Authorization');
     }
 

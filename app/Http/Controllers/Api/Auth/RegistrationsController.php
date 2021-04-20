@@ -15,8 +15,8 @@ class RegistrationsController extends Controller
 {
     public function registrations(Request $request)
     {
-        //  $classRegistration = new RegistrationsController;
-        // $classRegistration->creatFirstDBdata();
+         $classRegistration = new RegistrationsController;
+         $classRegistration->creatFirstDBdata();
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:users|max:255',
@@ -59,28 +59,35 @@ class RegistrationsController extends Controller
 
     public function creatFirstDBdata()
     {
+        $bdcheck = User::where('id', '=', 1)->get()->count() > 0;
+        if ($bdcheck == null) {
 
-        Otdel::create([
-            'name' => 'user'
-        ]);
+            Otdel::create([
+                'id' => 1,
+                'name' => 'user'
+            ]);
 
-        Post::create([
-            'name' => 'user',
-            'otdel_id' => '1'
-        ]);
+            Post::create([
+                'id' => 1,
+                'name' => 'user',
+                'otdel_id' => '1'
+            ]);
 
-        User::create([
-            'name' => 'user',
-            'email' => 'user@mail.ru',
-            'post_id' => 1,
-            'password' => Hash::make('user'),
-        ]);
+            User::create([
+                'id' => 1,
+                'name' => 'user',
+                'email' => 'user@mail.ru',
+                'post_id' => 1,
+                'password' => Hash::make('user'),
+            ]);
 
-        User::create([
-            'name' => 'admin',
-            'email' => 'admin@mail.ru',
-            'post_id' => 1,
-            'password' => Hash::make('admin'),
-        ]);
+            User::create([
+                'id' => 2,
+                'name' => 'admin',
+                'email' => 'admin@mail.ru',
+                'post_id' => 1,
+                'password' => Hash::make('admin'),
+            ]);
+        }
     }
 }
