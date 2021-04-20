@@ -15,12 +15,20 @@
 ## Api URL<br>
 ### Авторизация и регистрация<br>
 Авторизация(post):
-    /api/login<br>
+    /api/auth/login<br>
  Поля: email,password
   
 Регистрация(post):
-    /api/registrations<br>
+     /api/auth/registrations<br>
 Поля: name, email, type, github, city, phone, birthday, post_id
+
+Подтверждение восстановления пароля(post):
+     /api/auth/restore<br>
+Поле: email
+
+Подтверждение восстановления пароля(post):
+     /api/auth/restore/confirm<br>
+Поле: password
 
 ### Для пользователя<br>
 Список отделов(get):
@@ -35,20 +43,26 @@
     
 ### Для Сотрудник<br>
 Поиск информации по имени(get):
-   /api/query/{имя полозователя}<br>
+   /api/workers<br>
+Поле: query
 
 Поиск информации о людях по отделу ID(get):
-   /api/department_id/{Id отдела}<br>
+   /api/workers<br>
+Поле: department_id
 
 Поиск информации о людях по должности(get):
-   /api/position_id/{Id должности}<br>
+   /api/workers<br>
+Поле: position_id
+
+Поиск информации о людях по id пользователя(get):
+   /api/workers/{id}<br>
 
 Список отделов c должностями(get):
     /api/department<br>
     
 ### Для Админа<br>   
 Админ панель(get):
-   /api/login
+   /admin
     
     
    

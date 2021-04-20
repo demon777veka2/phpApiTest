@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('login', 'Api\Auth\LoginController@login');
-Route::post('registrations', 'Api\Auth\RegistrationsController@registrations');
+Route::group(['prefix' => 'auth'], function () {
+  Route::post('login', 'Api\Auth\LoginController@login');
+  Route::post('registrations', 'Api\Auth\RegistrationsController@registrations');
+  Route::post('restore', 'Api\Auth\LoginController@restore');
+  Route::post('restore/confirm', 'Api\Auth\LoginController@restoreConfirm');
+});
 
 Route::group(['middleware' => ['auth.jwt']], function () {
   Route::get('user', 'Api\TaskTwo\TaskTwoController@user');
@@ -25,5 +29,4 @@ Route::group(['middleware' => ['auth.jwt']], function () {
 
   Route::get('workers/{id}', 'Api\taskTwo\TaskTwoController@workersSerchIdUser');
   Route::get('workers', 'Api\TaskTwo\TaskTwoController@workersAll');
-
 });
