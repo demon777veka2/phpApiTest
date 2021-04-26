@@ -71,14 +71,12 @@
 ## Для Админа(web)<br>   
 Админ панель:
    /adminpanel<br>  
-   
-login: admin@mail.ru<br>  
+login: admin@mail.ru  
 password: admin<br>  
 
 Админ панель Voayger:
-   /adminvgr<br>  
-
-login: adminvgr@mail.ru<br>  
+   /adminvgr<br>   
+login: adminvgr@mail.ru  
 password: admin<br>  
     
     
