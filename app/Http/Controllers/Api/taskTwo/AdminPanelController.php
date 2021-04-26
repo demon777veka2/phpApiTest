@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\TaskTwo;
 
 use App\Http\Controllers\Controller;
-use App\Otdel;
-use App\Post;
+use App\Models\Otdel;
+use App\Models\Position;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -117,7 +117,7 @@ class AdminPanelController extends Controller
     public function otdelAdd(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:posts|max:255',
+            'name' => 'required|unique:positions|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -145,7 +145,7 @@ class AdminPanelController extends Controller
     public function otdelEdit(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:posts|max:255',
+            'name' => 'required|unique:positions|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -170,14 +170,14 @@ class AdminPanelController extends Controller
 
     public function post()
     {
-        $tablePost = Post::get();
+        $tablePost = Position::get();
         return view('Post', ['tablePost' => $tablePost]);
     }
 
     public function postAdd(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:posts|max:255',
+            'name' => 'required|unique:positions|max:255',
             'otdel_id' => 'regex:/[0-9]*/|nullable',
         ]);
 
@@ -187,7 +187,7 @@ class AdminPanelController extends Controller
 
         if (empty($request['otdel_id'])) $request['otdel_id'] = 1;
 
-        Post::create([
+        Position::create([
             'name' => $request['name'],
             'otdel_id' => $request['otdel_id'],
         ]);
@@ -201,7 +201,7 @@ class AdminPanelController extends Controller
 
     public function postEditView($id)
     {
-        $infoPostId = Post::where('id', $id)->get();
+        $infoPostId = Position::where('id', $id)->get();
         return view('PostEdit', ['infoPostId' => $infoPostId]);
     }
 
@@ -213,12 +213,12 @@ class AdminPanelController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $infoPostId = Post::where('id', $request['id'])->get();
+            $infoPostId = Position::where('id', $request['id'])->get();
             return view('PostEdit', ['error' => "Ошибка ввода данных", 'infoPostId' => $infoPostId]);
         }
 
         $idUser = $request['id'];
-        $infoUser = Post::find($idUser);
+        $infoUser = Position::find($idUser);
 
         $infoUser->update($request->all());
         return redirect()->action('Api\TaskTwo\AdminPanelController@post');
@@ -226,7 +226,7 @@ class AdminPanelController extends Controller
 
     public function postDelete($id)
     {
-        Post::where('id', $id)->delete();
+        Position::where('id', $id)->delete();
         return redirect()->action('Api\TaskTwo\AdminPanelController@post');
     }
 }

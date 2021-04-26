@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\TaskTwo;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Otdel;
-use App\Post;
+use App\Models\Otdel;
+use App\Models\Position;
 use Exception;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +27,7 @@ class TaskTwoController extends Controller
         $postId =  User::where('id', '=', $idUser)->get('post_id');
         $postId = preg_replace("/[^0-9]/", '', $postId);
 
-        $otdelId =  Post::where('id', '=', $postId)->get('otdel_id');
+        $otdelId =  Position::where('id', '=', $postId)->get('otdel_id');
         $otdelId = preg_replace("/[^0-9]/", '', $otdelId);
 
         if ($postId == 1) {
@@ -35,7 +35,7 @@ class TaskTwoController extends Controller
             return response()->json($otdelInfo, 200);
         }
 
-        $myOtdelInfo = Post::where('otdel_id', '=', $otdelId)->get();
+        $myOtdelInfo = Position::where('otdel_id', '=', $otdelId)->get();
         $otdelInfo = Otdel::where('name', '!=', 'admin')->where('name', '!=', 'user')->get();
 
         return response()->json([$myOtdelInfo, $otdelInfo], 200);
@@ -112,11 +112,11 @@ class TaskTwoController extends Controller
             $userIdSerchOtdel = User::where('name', '=', $name)->get('post_id');
             $userIdSerchOtdel = preg_replace("/[^0-9]/", '', $userIdSerchOtdel);
 
-            $userOtdelId = Post::where('otdel_id', '=', $userIdSerchOtdel)->get('otdel_id');
+            $userOtdelId = Position::where('otdel_id', '=', $userIdSerchOtdel)->get('otdel_id');
             $userOtdelId = preg_replace("/[^0-9]/", '', $userOtdelId);
 
 
-            $myOtdelId = Post::where('id', '=', $postId)->get('otdel_id');
+            $myOtdelId = Position::where('id', '=', $postId)->get('otdel_id');
             $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
 
             if ($userOtdelId ==  $myOtdelId) {
@@ -148,7 +148,7 @@ class TaskTwoController extends Controller
             if ($bdcheck == null)
                 return response()->json(['error' => true, 'message' => 'Not found otdel']);
 
-            $myOtdelId = Post::where('id', '=', $postId)->get('otdel_id');
+            $myOtdelId = Position::where('id', '=', $postId)->get('otdel_id');
             $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
 
             if ($id ==  $myOtdelId) {
@@ -156,10 +156,10 @@ class TaskTwoController extends Controller
                 //Вывод информации пользователей с одного отдела
                 $arrayId = array(); //пустой массив для будущих id post
 
-                $ammountPost = Post::get()->count();
+                $ammountPost = Position::get()->count();
                 for ($i = 1; $i <= $ammountPost; $i++) {
 
-                    $indexOtdelId = Post::where('id', '=', $i)->get('otdel_id');
+                    $indexOtdelId = Position::where('id', '=', $i)->get('otdel_id');
                     $indexOtdelId = preg_replace("/[^0-9]/", '', $indexOtdelId);
 
                     if ($myOtdelId == $indexOtdelId) {
@@ -207,14 +207,14 @@ class TaskTwoController extends Controller
             $id = $request['position_id'];
 
             //получения доступа к данным, сверяя с отделом
-            $bdcheck = Post::where('id', '=', $id)->get()->count() > 0;
+            $bdcheck = Position::where('id', '=', $id)->get()->count() > 0;
             if ($bdcheck == null)
                 return response()->json(['error' => true, 'message' => 'Not found id post']);
 
-            $requestedPostlId = Post::where('id', '=', $id)->get('otdel_id');
+            $requestedPostlId = Position::where('id', '=', $id)->get('otdel_id');
             $requestedPostlId = preg_replace("/[^0-9]/", '', $requestedPostlId);
 
-            $myOtdelId = Post::where('id', '=', $postId)->get('otdel_id');
+            $myOtdelId = Position::where('id', '=', $postId)->get('otdel_id');
             $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
 
             if ($requestedPostlId ==  $myOtdelId) {
@@ -250,10 +250,10 @@ class TaskTwoController extends Controller
         $userIdSerchOtdel = User::where('id', '=', $id)->get('post_id');
         $userIdSerchOtdel = preg_replace("/[^0-9]/", '', $userIdSerchOtdel);
 
-        $userOtdelId = Post::where('otdel_id', '=', $userIdSerchOtdel)->get('otdel_id');
+        $userOtdelId = Position::where('otdel_id', '=', $userIdSerchOtdel)->get('otdel_id');
         $userOtdelId = preg_replace("/[^0-9]/", '', $userOtdelId);
 
-        $myOtdelId = Post::where('id', '=', $postId)->get('otdel_id');
+        $myOtdelId = Position::where('id', '=', $postId)->get('otdel_id');
         $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
 
         if ($userOtdelId ==  $myOtdelId) {

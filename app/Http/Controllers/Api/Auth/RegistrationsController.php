@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\Auth;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
-use App\Otdel;
-use App\Post;
+use App\Models\Otdel;
+use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -67,7 +67,7 @@ class RegistrationsController extends Controller
                 'name' => 'user'
             ]);
 
-            Post::create([
+            Position::create([
                 'id' => 1,
                 'name' => 'user',
                 'otdel_id' => '1'

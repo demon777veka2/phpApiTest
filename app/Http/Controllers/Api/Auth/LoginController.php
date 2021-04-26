@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Api\Auth\Controller;
 use App\Http\Controllers\Api\TaskTwo\AdminPanelController;
 use Illuminate\Http\Request;
-use App\Post;
+use App\Models\Position;
 use App\User;
 //use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Auth;

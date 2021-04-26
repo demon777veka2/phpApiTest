@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Position extends Model
 {
-    public $timestamps = false;
+   public $timestamps = false;
 
     protected $fillable = [
         'name', 'otdel_id'

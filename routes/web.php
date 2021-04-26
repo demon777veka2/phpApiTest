@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('admin', 'Api\Auth\LoginController@loginAdminView');
+Route::get('adminpanel', 'Api\Auth\LoginController@loginAdminView');
 Route::post('loginAdmin', 'Api\Auth\LoginController@loginAdmin');
 
 Route::group(['middleware' => ['AdminCheck']], function () {
@@ -37,4 +37,9 @@ Route::group(['middleware' => ['AdminCheck']], function () {
     Route::post('OtdelTableEdit/{id}', 'Api\TaskTwo\AdminPanelController@otdelEdit');
     Route::get('OtdelTableAdd', 'Api\TaskTwo\AdminPanelController@otdelAddView');
     Route::post('OtdelTableAdd', 'Api\TaskTwo\AdminPanelController@otdelAdd');
+});
+
+
+Route::group(['prefix' => 'adminvgr'], function () {
+    Voyager::routes();
 });

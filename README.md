@@ -3,10 +3,22 @@
 
 ## Запуск<br>
 Для запуска проекта:
+1. импортировать таблицу в базу данных. Расположение файла: DBMysql\laravelapi.sql
+2. запустить сервер командой в терминале: php artisan serve
+3. для проверки работы api запросов используйте приложение Postman.
+
+или
+
 1. создать и подключить базу данных
-2. выполнить миграцию в терминале вашей рабочей среды командой: php artisan migrate
+2. выполнить миграцию в терминале вашей рабочей среды командой: php artisan voyager:install
 3. запустить сервер командой в терминале: php artisan serve
-4. Для проверки работы api запросов используйте приложение Postman.
+4. для проверки работы api запросов используйте приложение Postman
+5. для работы в админ панеле Voyager нужно прописать команду в терминале вашего проекта:
+	5.1 php artisan voyager:admin adminvgr@mail.com --create
+	5.2 admin
+	5.3 admin
+	5.4 admin
+
 
 ## Api URL<br>
 ### Авторизация и регистрация<br>
@@ -56,9 +68,17 @@
 Список отделов c должностями(get):
     /api/department<br>
     
-### Для Админа<br>   
-Админ панель(get):
-   /admin
+## Для Админа(web)<br>   
+Админ панель:
+   /adminpanel
+login: admin@mail.ru
+password: admin
+
+Админ панель Voayger:
+   /adminvgr
+
+login: adminvgr@mail.ru
+password: admin
     
     
    
