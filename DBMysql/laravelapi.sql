@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 26 2021 г., 06:34
+-- Время создания: Апр 27 2021 г., 06:31
 -- Версия сервера: 10.4.11-MariaDB
 -- Версия PHP: 7.4.2
 
@@ -267,7 +267,8 @@ CREATE TABLE `otdels` (
 --
 
 INSERT INTO `otdels` (`id`, `name`) VALUES
-(1, 'user');
+(1, 'user'),
+(2, 'Отдел продаж');
 
 -- --------------------------------------------------------
 
@@ -428,7 +429,8 @@ CREATE TABLE `positions` (
 --
 
 INSERT INTO `positions` (`id`, `name`, `otdel_id`) VALUES
-(1, 'user', 1);
+(1, 'user', 1),
+(2, 'Менеджер', 2);
 
 -- --------------------------------------------------------
 
@@ -560,7 +562,10 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified
 (1, 2, 'user', 'user@mail.ru', 'users/default.png', NULL, '$2y$10$/VrzBgAuqykex3Bb3pdpkOOVUe7YImVPQhxTZuhAEsdwGdLsSAqFq', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
 (2, 2, 'admin', 'admin@mail.ru', 'users/default.png', NULL, '$2y$10$QBdBT/o/.C/.42qiPuJCSuya0xfUfGYBDHyreySUSEyZZuadnOdpy', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
 (4, 1, 'adminvgr', 'adminvgr@mail.ru', 'users/default.png', NULL, '$2y$10$sV3GA8LiQLxXxFNV2Dqiue/If4KOqMu0P3hs3b.A/QojnKeTL.zwK', NULL, '{\"locale\":\"en\"}', NULL, '2021-04-25 21:22:04', NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 2, 'adminq', 'qadminq1@mail.ru', 'users/default.png', NULL, '$2y$10$UdDoBL7hwGsDYy6ffw4A1uRNLNIi39v8AK7SD1g7VILsGOD.6zCgW', NULL, NULL, NULL, NULL, '', '', '', '', NULL, 1);
+(12, 2, 'quer', 'quer@mail.ru', 'users/default.png', NULL, '$2y$10$eLg91uIi89HGApHZFRuZdeXS3VXbsWvDF5FeDzQKmjUfMvKKx2ZMm', NULL, NULL, NULL, NULL, '', '', '', '', NULL, 2),
+(13, 2, 'Noname', 'noname@mail.ru', 'users/default.png', NULL, '$2y$10$qUZhZazEoorIZwv.Yr2WK.3xZcjTHu4m8wgLF.OGNqi8pWO3Nufj6', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(14, 2, 'agent007', 'agent@mail.ru', 'users/default.png', NULL, 'agent', NULL, NULL, NULL, NULL, NULL, NULL, 'Кисловодск', '88005553535', 2007, 2),
+(16, 2, 'gambit', 'gambit@mail.ru', 'users/default.png', NULL, '$2y$10$/fr57BVVRVZcNULgX5QowuKlxfnP7dE0VoXYr7yGywTBhIoOD99xm', NULL, NULL, NULL, NULL, '', '', '', '', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -761,7 +766,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT для таблицы `otdels`
 --
 ALTER TABLE `otdels`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `pages`
@@ -779,7 +784,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT для таблицы `positions`
 --
 ALTER TABLE `positions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `posts`
@@ -809,7 +814,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
