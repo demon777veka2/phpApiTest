@@ -11,7 +11,7 @@
     </div></br>
 
     <div class="row">
-        <form method="post" action="PostTableAdd">
+        <form method="post" action="post-table-add">
             @csrf
             <div class="col-md-offset-3 col-md-6">
                 <form class="form-horizontal">

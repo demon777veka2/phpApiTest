@@ -11,7 +11,7 @@
     </div></br>
 
     <div class="row">
-        <form method="post" action="OtdelTableEdit">
+        <form method="post" action="otdel-table-edit">
             @foreach($infoUserId as $el)
             @csrf
             <div class="col-md-offset-3 col-md-6">

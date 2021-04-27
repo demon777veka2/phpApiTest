@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
   Route::post('login', 'Api\Auth\LoginController@login');
-  Route::post('registrations', 'Api\Auth\RegistrationsController@registrations');
+  Route::post('registrations', 'Api\Auth\RegistrationsController@registrations')->middleware('throttle:4,1');
   Route::post('restore', 'Api\Auth\LoginController@restore');
   Route::post('restore/confirm', 'Api\Auth\LoginController@restoreConfirm');
 });

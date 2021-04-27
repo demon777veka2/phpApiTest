@@ -7,7 +7,7 @@
 <div style="margin:0 auto; width:50%;float:left;  height: 800px; padding-left: 20%">
 
     <div style="margin:40px 0 40px 0">
-        <a href="OtdelTableAdd">
+        <a href="otdel-table-add">
             <input class="btn btn-secondary" type="submit" value="Добавить новую запись" name="add">
         </a>
     </div>
@@ -20,10 +20,10 @@
         <tr>
             <td>{{$el->name}}</td>
             <td>
-                <a href='OtdelTableDelete/{{ $el->id }}'>Удалить</a>
+                <a href='otdel-table-delete/{{ $el->id }}'>Удалить</a>
             </td>
             <td>
-                <a href='OtdelTableEdit/{{ $el->id }}'>Редактировать</a>
+                <a href='otdel-table-edit/{{ $el->id }}'>Редактировать</a>
             </td>
         </tr>
         @endforeach

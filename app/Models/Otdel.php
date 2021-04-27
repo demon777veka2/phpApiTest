@@ -11,4 +11,5 @@ class Otdel extends Model
     protected $fillable = [
         'name'
     ];
+   
 }

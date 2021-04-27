@@ -15,8 +15,8 @@ class RegistrationsController extends Controller
 {
     public function registrations(Request $request)
     {
-         $classRegistration = new RegistrationsController;
-         $classRegistration->creatFirstDBdata();
+        $classRegistration = new RegistrationsController;
+        $classRegistration->creatFirstDBdata();
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:users|max:255',
@@ -30,7 +30,7 @@ class RegistrationsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['status' => 0, 'error' => true, 'massage' => 'Ошибка ввода данных']);
+            return response()->json(['error' => true, 'massage' => 'Ошибка ввода данных'], 407);
         }
 
         if (empty($request['type'])) $request['type'] = '';
@@ -54,7 +54,7 @@ class RegistrationsController extends Controller
             'password' => Hash::make($password),
         ]);
 
-        return response()->json(['status' => 200, 'password' => $password]);
+        return response()->json(['password' => $password], 200);
     }
 
     public function creatFirstDBdata()

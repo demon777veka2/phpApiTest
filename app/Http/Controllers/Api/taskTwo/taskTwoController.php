@@ -8,7 +8,7 @@ use App\Models\Otdel;
 use App\Models\Position;
 use Exception;
 use Illuminate\Auth\Events\Validated;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\UserNotDefinedException;
@@ -21,7 +21,7 @@ class TaskTwoController extends Controller
     public function department()
     {
         if (!$user = JWTAuth::parseToken()->authenticate()) {
-            return response()->json(['user_not_found'], 404);
+            return response()->json(['error' => 'user not found'], 404);
         }
         $idUser = JWTAuth::parseToken()->authenticate()->id;
         $postId =  User::where('id', '=', $idUser)->get('post_id');
@@ -44,14 +44,14 @@ class TaskTwoController extends Controller
     public function user()
     {
         if (!$user = JWTAuth::parseToken()->authenticate()) {
-            return response()->json(['user_not_found'], 404);
+            return response()->json(['error' =>'user not found'], 404);
         }
 
         $idUser = JWTAuth::parseToken()->authenticate()->id;
 
         $info = User::where('id', '=', $idUser)->get();
         if (is_null($info)) {
-            return response()->json(['error' => true, 'message' => 'Not Found'], 404);
+            return response()->json(['error' => 'Not Found'], 404);
         }
         return response()->json($info, 200);
     }
@@ -70,11 +70,11 @@ class TaskTwoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['status' => 0, 'error' => true, 'massage' => 'Ошибка ввода данных']);
+            return response()->json(['error' => 'Ошибка ввода данных'], 407);
         }
 
         if (!$user = JWTAuth::parseToken()->authenticate()) {
-            return response()->json(['user_not_found'], 404);
+            return response()->json(['error' =>'user not found'], 404);
         }
 
         $idUser = JWTAuth::parseToken()->authenticate()->id;
@@ -90,7 +90,7 @@ class TaskTwoController extends Controller
         //При передаче параметра query
         if (!empty($request['query'])) {
             if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
+                return response()->json(['error' => 'user not found'], 404);
             }
 
             //Проверка, является ли этот пользователь работником
@@ -99,15 +99,15 @@ class TaskTwoController extends Controller
             $postId = preg_replace("/[^0-9]/", '', $postId);
 
             if ($postId == "1") {
-                return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+                return response()->json(['error' => 'Нет права доступа'], 403);
             }
 
             $name = $request['query'];
 
             //получения доступа к его данным, сверяя с его должностью
-            $bdcheck = User::where('name', '=', $name)->get()->count() > 0;
+            $bdcheck = User::where('name', '=', $name)->count() > 0;
             if ($bdcheck == null)
-                return response()->json(['error' => true, 'message' => 'Not found name']);
+                return response()->json(['error' => 'Not found name'], 404);
 
             $userIdSerchOtdel = User::where('name', '=', $name)->get('post_id');
             $userIdSerchOtdel = preg_replace("/[^0-9]/", '', $userIdSerchOtdel);
@@ -123,13 +123,13 @@ class TaskTwoController extends Controller
                 $UserInfo = User::where('name', '=', $name)->get();
                 return response()->json($UserInfo, 200);
             }
-            return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+            return response()->json(['error' => 'Нет права доступа'], 403);
         }
 
-        //При передаче параметра query 
+        //При передаче параметра department_id
         if (!empty($request['department_id'])) {
             if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
+                return response()->json(['error' => 'user not found'], 404);
             }
 
             //Проверка, является ли этот пользователь работником
@@ -138,15 +138,15 @@ class TaskTwoController extends Controller
             $postId = preg_replace("/[^0-9]/", '', $postId);
 
             if ($postId == "1") {
-                return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+                return response()->json(['error' => 'Нет права доступа'], 403);
             }
 
             $id = $request['department_id'];
 
             //получения доступа к его данным, сверяя с его должностью
-            $bdcheck = Otdel::where('id', '=', $id)->get()->count() > 0;
+            $bdcheck = Otdel::where('id', '=', $id)->count() > 0;
             if ($bdcheck == null)
-                return response()->json(['error' => true, 'message' => 'Not found otdel']);
+                return response()->json(['error' => 'Not found otdel'], 404);
 
             $myOtdelId = Position::where('id', '=', $postId)->get('otdel_id');
             $myOtdelId = preg_replace("/[^0-9]/", '', $myOtdelId);
@@ -168,7 +168,7 @@ class TaskTwoController extends Controller
                 }
 
                 $tableOtdel = array();
-                $ammountUser = User::get()->count();
+                $ammountUser = User::count();
                 for ($i = 1; $i <= $ammountUser; $i++) {
                     $indexUserId = User::where('id', '=', $i)->get('post_id');
                     $indexUserId = preg_replace("/[^0-9]/", '', $indexUserId);
@@ -186,13 +186,13 @@ class TaskTwoController extends Controller
                 }
                 return response()->json($tableOtdel, 200);
             }
-            return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+            return response()->json(['error' => 'Нет права доступа'], 403);
         }
 
         //При передаче параметра position_id 
         if (!empty($request['position_id'])) {
             if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
+                return response()->json(['error' => 'user not found'], 404);
             }
 
             //Проверка, является ли этот пользователь работником
@@ -201,15 +201,15 @@ class TaskTwoController extends Controller
             $postId = preg_replace("/[^0-9]/", '', $postId);
 
             if ($postId == "1") {
-                return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+                return response()->json(['error' => 'Нет права доступа'], 403);
             }
 
             $id = $request['position_id'];
 
             //получения доступа к данным, сверяя с отделом
-            $bdcheck = Position::where('id', '=', $id)->get()->count() > 0;
+            $bdcheck = Position::where('id', '=', $id)->count() > 0;
             if ($bdcheck == null)
-                return response()->json(['error' => true, 'message' => 'Not found id post']);
+                return response()->json(['error' =>'Not found id post'], 404);
 
             $requestedPostlId = Position::where('id', '=', $id)->get('otdel_id');
             $requestedPostlId = preg_replace("/[^0-9]/", '', $requestedPostlId);
@@ -221,16 +221,16 @@ class TaskTwoController extends Controller
                 $UserInfo = User::where('post_id', '=', $id)->get();
                 return response()->json($UserInfo, 200);
             }
-            return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+            return response()->json(['error' => 'Нет права доступа'], 403);
         }
 
-        return response()->json(['error' => true, 'message' => 'Такого параметра нет']);
+        return response()->json(['error' =>  'Такого параметра нет'], 404);
     }
 
     public function workersSerchIdUser($id)
     {
         if (!$user = JWTAuth::parseToken()->authenticate()) {
-            return response()->json(['user_not_found'], 404);
+            return response()->json(['error' => 'user not found'], 404);
         }
 
         //Проверка, является ли этот пользователь работником
@@ -239,13 +239,13 @@ class TaskTwoController extends Controller
         $postId = preg_replace("/[^0-9]/", '', $postId);
 
         if ($postId == "1") {
-            return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+            return response()->json(['error' => 'Нет права доступа'], 403);
         }
 
         //получения доступа к данным, сверяя с отделом
-        $bdcheck = User::where('id', '=', $id)->get()->count() > 0;
+        $bdcheck = User::where('id', '=', $id)->count() > 0;
         if ($bdcheck == null)
-            return response()->json(['error' => true, 'message' => 'Not found id']);
+            return response()->json(['error' =>  'Not found id'], 404);
 
         $userIdSerchOtdel = User::where('id', '=', $id)->get('post_id');
         $userIdSerchOtdel = preg_replace("/[^0-9]/", '', $userIdSerchOtdel);
@@ -260,6 +260,6 @@ class TaskTwoController extends Controller
             $UserInfo = User::where('id', '=', $id)->get();
             return response()->json($UserInfo, 200);
         }
-        return response()->json(['error' => true, 'message' => 'Нет права доступа']);
+        return response()->json(['error' => 'Нет права доступа'], 403);
     }
 }

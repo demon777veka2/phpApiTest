@@ -8,7 +8,7 @@
 <div class="container" style="margin:0 25% 0 25%; width:50%;">
    <div class="row" style="margin-top:50px;">
 
-      <form method="post" action="loginAdmin">
+      <form method="post" action="admin">
          @csrf
          <div class="col-md-offset-3 col-md-6" style='width:700px'>
             <div style="color:red">{{ isset($error) ? $error : '' }}</div>
