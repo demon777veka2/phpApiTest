@@ -23,7 +23,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|max:255|min:30',
+            'email' => 'required|email|max:255',
             'password' => 'required|max:255',
 
         ]);
