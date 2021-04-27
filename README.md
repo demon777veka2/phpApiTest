@@ -13,11 +13,11 @@
 2. выполнить миграцию в терминале вашей рабочей среды командой: php artisan voyager:install
 3. запустить сервер командой в терминале: php artisan serve
 4. для проверки работы api запросов используйте приложение Postman
-5. для работы в админ панеле Voyager нужно прописать команду в терминале вашего проекта:
-	5.1 php artisan voyager:admin adminvgr@mail.com --create
-	5.2 admin
-	5.3 admin
-	5.4 admin
+5. для работы в админ панеле Voyager нужно прописать команды в терминале вашего проекта:<br>
+	5.1 php artisan voyager:admin adminvgr@mail.com --create<br>
+	5.2 admin<br>
+	5.3 admin<br>
+	5.4 admin<br>
 
 
 ## Api URL<br>
@@ -70,15 +70,14 @@
     
 ## Для Админа(web)<br>   
 Админ панель:
-   /adminpanel
-login: admin@mail.ru
-password: admin
+   /adminpanel<br>  
+login: admin@mail.ru  
+password: admin<br>  
 
 Админ панель Voayger:
-   /adminvgr
-
-login: adminvgr@mail.ru
-password: admin
+   /adminvgr<br>   
+login: adminvgr@mail.ru  
+password: admin<br>  
     
     
    
