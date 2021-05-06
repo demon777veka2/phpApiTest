@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Models\Otdel;
 use App\Models\Position;
 use Illuminate\Http\Request;
@@ -59,10 +60,10 @@ class RegistrationsController extends Controller
 
     public function creatFirstDBdata()
     {
-        $bdcheck = User::where('id', '=', 1)->get()->count() > 0;
+        $bdcheck = User::find(1)->get()->count() > 0;
         if ($bdcheck == null) {
 
-            Otdel::create([
+            Department::create([
                 'id' => 1,
                 'name' => 'user'
             ]);

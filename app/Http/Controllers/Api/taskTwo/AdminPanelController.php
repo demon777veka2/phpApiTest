@@ -3,18 +3,10 @@
 namespace App\Http\Controllers\Api\TaskTwo;
 
 use App\Http\Controllers\Controller;
-use App\Models\Otdel;
-use App\Models\Position;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Facades\JWTAuth;
-
-use Illuminate\Http\Response;
-use App\Http\Requests;
-
-
 
 class AdminPanelController extends Controller
 {
@@ -71,7 +63,10 @@ class AdminPanelController extends Controller
 
     public function userEditView($id)
     {
-        $infoUserId = User::where('id', $id)->get();
+        $infoUserId = User::find($id)->get();
+        if ($infoUserId == null) 
+            return view('error', ['error' => 'Такой пользоваль не найден']);
+
         return view('AdminPanelEdit', ['infoUserId' => $infoUserId]);
     }
 
@@ -89,12 +84,17 @@ class AdminPanelController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $infoUserId = User::where('id', $request['id'])->get();
+            $infoUserId = User::find($request['id'])->get();
+            if ($infoUserId == null) 
+                return view('error', ['error' => 'Такой пользоваль не найден']);
+
             return view('AdminPanelEdit', ['error' => "Ошибка ввода данных", 'infoUserId' => $infoUserId]);
         }
 
         $idUser = $request['id'];
         $infoUser = User::find($idUser);
+        if ($infoUser == null) 
+            return view('error', ['error' => 'Такой пользоваль не найден']);
 
         $infoUser->update($request->all());
         return redirect()->action('Api\TaskTwo\AdminPanelController@user');
@@ -102,131 +102,10 @@ class AdminPanelController extends Controller
 
     public function userDelete($id)
     {
-        User::where('id', $id)->delete();
+        if ($id == null) 
+                return view('error', ['error' => 'Такой пользоваль не найден']);
+
+        User::find($id)->delete();
         return redirect()->action('Api\TaskTwo\AdminPanelController@user');
-    }
-
-    //--------------------------------------------------- Отдел -------------------------------------------------------
-
-    public function otdel()
-    {
-        $tableOtdel = Otdel::get();
-        return view('Otdel', ['tableOtdel' => $tableOtdel]);
-    }
-
-    public function otdelAdd(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:positions|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            return view('OtdelAdd', ['error' => "Ошибка ввода данных"]);
-        }
-
-
-        Otdel::create([
-            'name' => $request['name']
-        ]);
-
-        return redirect()->action('Api\TaskTwo\AdminPanelController@otdel');
-    }
-    public function otdelAddView()
-    {
-        return view('OtdelAdd');
-    }
-
-    public function otdelEditView($id)
-    {
-        $infoOtdelId = Otdel::where('id', $id)->get();
-        return view('OtdelEdit', ['infoUserId' => $infoOtdelId]);
-    }
-
-    public function otdelEdit(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:positions|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            $infoOtdelId = Otdel::where('id', $request['id'])->get();
-            return view('OtdelEdit', ['error' => "Ошибка ввода данных", 'infoUserId' => $infoOtdelId]);
-        }
-
-        $idUser = $request['id'];
-        $infoUser = Otdel::find($idUser);
-
-        $infoUser->update($request->all());
-        return redirect()->action('Api\TaskTwo\AdminPanelController@otdel');
-    }
-
-    public function otdelDelete($id)
-    {
-        Otdel::where('id', $id)->delete();
-        return redirect()->action('Api\TaskTwo\AdminPanelController@otdel');
-    }
-
-    //--------------------------------------------------- Должность -------------------------------------------------------
-
-    public function post()
-    {
-        $tablePost = Position::get();
-        return view('Post', ['tablePost' => $tablePost]);
-    }
-
-    public function postAdd(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:positions|max:255',
-            'otdel_id' => 'regex:/[0-9]*/|nullable',
-        ]);
-
-        if ($validator->fails()) {
-            return view('PostAdd', ['error' => "Ошибка ввода данных"]);
-        }
-
-        if (empty($request['otdel_id'])) $request['otdel_id'] = 1;
-
-        Position::create([
-            'name' => $request['name'],
-            'otdel_id' => $request['otdel_id'],
-        ]);
-
-        return redirect()->action('Api\TaskTwo\AdminPanelController@post');
-    }
-    public function postAddView()
-    {
-        return view('PostAdd');
-    }
-
-    public function postEditView($id)
-    {
-        $infoPostId = Position::where('id', $id)->get();
-        return view('PostEdit', ['infoPostId' => $infoPostId]);
-    }
-
-    public function postEdit(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'nullable|max:255',
-            'otdel_id' => 'regex:/[0-9]*/|nullable',
-        ]);
-
-        if ($validator->fails()) {
-            $infoPostId = Position::where('id', $request['id'])->get();
-            return view('PostEdit', ['error' => "Ошибка ввода данных", 'infoPostId' => $infoPostId]);
-        }
-
-        $idUser = $request['id'];
-        $infoUser = Position::find($idUser);
-
-        $infoUser->update($request->all());
-        return redirect()->action('Api\TaskTwo\AdminPanelController@post');
-    }
-
-    public function postDelete($id)
-    {
-        Position::where('id', $id)->delete();
-        return redirect()->action('Api\TaskTwo\AdminPanelController@post');
     }
 }
