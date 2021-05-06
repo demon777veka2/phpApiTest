@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use TCG\Voyager\Facades\Voyager;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,26 +16,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['AdminCheck']], function () {
-    Route::get('user-table', 'Api\TaskTwo\AdminPanelController@user');
-    Route::get('user-table-delete/{id}', 'Api\TaskTwo\AdminPanelController@userDelete');
-    Route::get('user-table-edit/{id}', 'Api\TaskTwo\AdminPanelController@userEditView');
-    Route::post('user-table-edit/{id}', 'Api\TaskTwo\AdminPanelController@userEdit');
-    Route::get('user-table-add', 'Api\TaskTwo\AdminPanelController@userAddView');
-    Route::post('user-table-add', 'Api\TaskTwo\AdminPanelController@userAdd');
+    Route::get('users/', 'Api\TaskTwo\AdminPanelController@user');
+    Route::get('user/{id}/delete', 'Api\TaskTwo\AdminPanelController@userDelete');
+    Route::get('user/{id}/edit', 'Api\TaskTwo\AdminPanelController@userEditView');
+    Route::post('user/{id}/edit', 'Api\TaskTwo\AdminPanelController@userEdit');
+    Route::get('user/add', 'Api\TaskTwo\AdminPanelController@userAddView');
+    Route::post('user/add', 'Api\TaskTwo\AdminPanelController@userAdd');
 
-    Route::get('post-table', 'Api\TaskTwo\AdminPanelController@post');
-    Route::get('post-table-delete/{id}', 'Api\TaskTwo\AdminPanelController@postDelete');
-    Route::get('post-table-edit/{id}', 'Api\TaskTwo\AdminPanelController@postEditView');
-    Route::post('post-table-edit/{id}', 'Api\TaskTwo\AdminPanelController@postEdit');
-    Route::get('post-table-add', 'Api\TaskTwo\AdminPanelController@postAddView');
-    Route::post('post-table-add', 'Api\TaskTwo\AdminPanelController@postAdd');
+    Route::get('positions', 'Api\TaskTwo\AdminPanelController@post');
+    Route::get('positions/{id}/delete', 'Api\TaskTwo\AdminPanelController@postDelete');
+    Route::get('positions/{id}/edit', 'Api\TaskTwo\AdminPanelController@postEditView');
+    Route::post('positions/{id}/edit', 'Api\TaskTwo\AdminPanelController@postEdit');
+    Route::get('positions/add', 'Api\TaskTwo\AdminPanelController@postAddView');
+    Route::post('positions/add', 'Api\TaskTwo\AdminPanelController@postAdd');
 
-    Route::get('otdel-table', 'Api\TaskTwo\AdminPanelController@otdel');
-    Route::get('otdel-table-delete/{id}', 'Api\TaskTwo\AdminPanelController@otdelDelete');
-    Route::get('otdel-table-edit/{id}', 'Api\TaskTwo\AdminPanelController@otdelEditView');
-    Route::post('otdel-table-edit/{id}', 'Api\TaskTwo\AdminPanelController@otdelEdit');
-    Route::get('otdel-table-add', 'Api\TaskTwo\AdminPanelController@otdelAddView');
-    Route::post('otdel-table-add', 'Api\TaskTwo\AdminPanelController@otdelAdd');
+    Route::get('departments', 'Api\TaskTwo\AdminPanelController@otdel');
+    Route::get('department/{id}/delete', 'Api\TaskTwo\AdminPanelController@otdelDelete');
+    Route::get('department/{id}/edit', 'Api\TaskTwo\AdminPanelController@otdelEditView');
+    Route::post('department/{id}/edit', 'Api\TaskTwo\AdminPanelController@otdelEdit');
+    Route::get('department/add', 'Api\TaskTwo\AdminPanelController@otdelAddView');
+    Route::post('department/add', 'Api\TaskTwo\AdminPanelController@otdelAdd');
 });
 
 
