@@ -70,7 +70,7 @@
     
 ## Для Админа(web)<br>   
 Админ панель:
-   /adminpanel<br>  
+   /admin<br>  
 login: admin@mail.ru  
 password: admin<br>  
 
