@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Otdel extends Model
+class Department extends Model
 {
     public $timestamps = false;
 
     protected $fillable = [
         'name'
     ];
-   
 }
