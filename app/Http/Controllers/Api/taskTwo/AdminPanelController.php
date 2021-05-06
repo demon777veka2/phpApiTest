@@ -13,7 +13,7 @@ class AdminPanelController extends Controller
     public function user()
     {
         $tableUser = User::get();
-        return view('AdminPanel', ['tableUser' => $tableUser]);
+        return view('admins/panel', ['tableUser' => $tableUser]);
     }
     public function userAdd(Request $request)
     {

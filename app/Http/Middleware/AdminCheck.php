@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCheck
 {
@@ -15,11 +16,11 @@ class AdminCheck
      */
     public function handle($request, Closure $next)
     {
-        if (empty(session('userId'))) {
+        //Auth::user()->id;
+        if (empty($userId = Auth::user()->id)) {
             return response()->json('You are not logged in'); 
         }
 
-        $userId = session('userId');
         if ($userId != 2)
             return response()->json('You are not an admin'); 
 

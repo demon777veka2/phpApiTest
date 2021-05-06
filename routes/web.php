@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('admin', 'Api\Auth\LoginController@loginAdminView');
-Route::post('admin', 'Api\Auth\LoginController@loginAdmin');
-
 Route::group(['middleware' => ['AdminCheck']], function () {
     Route::get('user-table', 'Api\TaskTwo\AdminPanelController@user');
     Route::get('user-table-delete/{id}', 'Api\TaskTwo\AdminPanelController@userDelete');
@@ -43,3 +40,7 @@ Route::group(['middleware' => ['AdminCheck']], function () {
 Route::group(['prefix' => 'adminvgr'], function () {
     Voyager::routes();
 });
+
+Auth::routes();
+
+Route::get('/admin', 'HomeController@index')->name('home');

@@ -45,47 +45,6 @@ class LoginController extends Controller
         return response()->json(['token' => $token], 200);
     }
 
-    public function loginAdmin(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email|max:255',
-            'password' => 'required|max:255',
-
-        ]);
-
-        if ($validator->fails()) {
-            return view('Authorization', ['error' => 'Ошибка ввода данных']);
-        }
-
-        $credentials = request(['email', 'password']);
-
-        if (!$token = JWTAuth::attempt($credentials)) {
-            return view('Authorization', ['error' => 'Unauthorized']);
-        }
-
-        //проверка на админа
-        $userId =  User::where('email', '=', $request['email'])->get('id');
-        $userId = preg_replace("/[^0-9]/", '', $userId);
-
-        if ($userId == 2) {
-            //заносим инфрормацию о пользователе на сайт
-            Session(['userId' => $userId]);
-            $tableUser = User::get();
-
-            return view('AdminPanel', ['tableUser' => $tableUser]);
-        }
-
-        return view('Authorization', ['error' => 'Вы не админ']);
-    }
-
-    public function loginAdminView()
-    {
-        $classRegistration = new RegistrationsController;
-        $classRegistration->creatFirstDBdata();
-
-        return view('Authorization');
-    }
-
     public function restore(Request $request)
     {
         $validator = Validator::make($request->all(), [
