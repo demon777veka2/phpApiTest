@@ -7,11 +7,10 @@
 
 <div class="container" style=" margin:0 25% 0 25%; width:50%;">
     <div style="color:red">
-        {{ isset($error) ? $error : '' }}
     </div></br>
 
     <div class="row">
-        <form method="post" action="user-table-edit">
+        <form method="post" action="edit">
             @foreach($infoPostId as $el)
             @csrf
             <div class="col-md-offset-3 col-md-6">
@@ -29,7 +28,7 @@
                     </div>
 
                     <div class="form-group help">
-                        Id Отдела<input type="text" class="form-control" value="{{$el->otdel_id}}" id="otdel_id" name="otdel_id" placeholder="otdel_id" style="width:200px;">
+                        Id Отдела<input type="text" class="form-control" value="{{$el->department_id}}" id="department_id" name="department_id" placeholder="department_id" style="width:200px;">
                         <i class="fa fa-lock"></i>
                         <a href="#" class="fa fa-question-circle"></a>
                     </div>

@@ -43,17 +43,17 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/user-table">
+              <a class="nav-link active" aria-current="page" href="{{route('users')}}">
                 <ya-tr-span data-index="1-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Home" data-translation="Пользователь" data-type="trSpan">Пользователь</ya-tr-span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/post-table">
+              <a class="nav-link active" href="{{route('positions')}}">
                 <ya-tr-span data-index="2-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="Должность" data-type="trSpan">Должность</ya-tr-span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/otdel-table">
+              <a class="nav-link active" href="{{route('departments')}}">
                 <ya-tr-span data-index="2-0" data-translated="true" data-source-lang="en" data-target-lang="ru" data-value="Link" data-translation="Отдел" data-type="trSpan">Отдел</ya-tr-span>
               </a>
             </li>

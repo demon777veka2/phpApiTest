@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Api\Auth\Controller;
 use App\Http\Controllers\Api\TaskTwo\AdminPanelController;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RestoreRequest;
 use Illuminate\Http\Request;
 use App\Models\Position;
 use App\User;
@@ -20,18 +22,8 @@ use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email|max:255',
-            'password' => 'required|max:255',
-
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => true, 'massage' => 'Ошибка ввода данных'], 407);
-        }
-
         $credentials = request(['email', 'password']);
 
         if (!$token = JWTAuth::attempt($credentials)) {

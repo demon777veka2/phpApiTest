@@ -21,10 +21,13 @@ class AdminCheck
             return response()->json('You are not logged in'); 
         }
 
-        if ($userId != 2)
-            return response()->json('You are not an admin'); 
+        if ($userId == 2)
+            return $next($request);
 
-        return $next($request);
+
+         return response()->json('You are not an admin'); 
+
+        
         
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\TaskTwo;
 
+use App\Http\Requests\AdminEditRequest;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\User;
@@ -56,23 +57,8 @@ class TaskTwoController extends Controller
         return response()->json($info, 200);
     }
 
-    public function userPut(Request $request)
+    public function userPut(AdminEditRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'nullable|unique:users|max:255',
-            'email' => 'nullable|email|unique:users|max:255',
-            'type' => 'nullable',
-            'github' => 'nullable|regex:/github.com([\/A-z]*)/',
-            'city' => 'nullable',
-            'phone' => 'max:11|nullable|regex:/8[0-9]{10}/',
-            'birthday' => 'regex:/[0-9]{4}/|max:4|nullable',
-            'post_id' => 'regex:/[0-9]*/|nullable',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => 'Ошибка ввода данных'], 407);
-        }
-
         if (!$user = JWTAuth::parseToken()->authenticate()) {
             return response()->json(['error' =>'user not found'], 404);
         }

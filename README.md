@@ -11,13 +11,14 @@
 
 1. создать и подключить базу данных
 2. выполнить миграцию в терминале вашей рабочей среды командой: php artisan voyager:install
-3. запустить сервер командой в терминале: php artisan serve
-4. для проверки работы api запросов используйте приложение Postman
-5. для работы в админ панеле Voyager нужно прописать команды в терминале вашего проекта:<br>
-	5.1 php artisan voyager:admin adminvgr@mail.com --create<br>
-	5.2 admin<br>
-	5.3 admin<br>
-	5.4 admin<br>
+3. заполните таблицы данными командой: php artisan db:seed --class=DataTablesSeeder
+4. запустить сервер командой в терминале: php artisan serve
+5. для проверки работы api запросов используйте приложение Postman
+6. для работы в админ панеле Voyager нужно прописать команды в терминале вашего проекта:<br>
+	6.1 php artisan voyager:admin adminvgr@mail.com --create<br>
+	6.2 admin<br>
+	6.3 admin<br>
+	6.4 admin<br>
 
 
 ## Api URL<br>

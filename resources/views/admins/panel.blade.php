@@ -7,7 +7,7 @@
     <div style="margin:0 auto; width:50%;float:left;  height: 800px; padding-left: 20%">
     
         <div style="margin:40px 0 40px 0">
-            <a href="user-table-add">
+            <a href="user/add">
                 <input class="btn btn-secondary" type="submit" value="Добавить новую запись" name="add">
             </a>
         </div>
@@ -35,10 +35,10 @@
                 <td>{{$el->birthday}}</td>
                 <td>{{$el->post_id }}</td>
                 <td>
-                    <a href='user-table-delete/{{ $el->id }}'>Удалить</a>
+                    <a href='user/{{ $el->id }}/delete'>Удалить</a>
                 </td>
                 <td>
-                    <a href='user-table-edit/{{ $el->id }}'>Редактировать</a>
+                    <a href='user/{{ $el->id }}/edit'>Редактировать</a>
                 </td>
             </tr>
             @endforeach

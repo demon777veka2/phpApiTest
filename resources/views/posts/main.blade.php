@@ -6,7 +6,7 @@
 <div style="margin:0 auto; width:50%;float:left;  height: 800px; padding-left: 20%">
 
     <div style="margin:40px 0 40px 0">
-        <a href="post-table-add">
+        <a href="post/add">
             <input class="btn btn-secondary" type="submit" value="Добавить новую запись" name="add">
         </a>
     </div>
@@ -20,12 +20,12 @@
         @foreach($tablePost as $el)
         <tr>
             <td>{{$el->name}}</td>
-            <td>{{$el->otdel_id}}</td>
+            <td>{{$el->department_id}}</td>
             <td>
-                <a href='post-table-delete/{{ $el->id }}'>Удалить</a>
+                <a href='post/{{ $el->id }}/delete'>Удалить</a>
             </td>
             <td>
-                <a href='post-table-edit/{{ $el->id }}'>Редактировать</a>
+                <a href='post/{{ $el->id }}/edit'>Редактировать</a>
             </td>
         </tr>
         @endforeach

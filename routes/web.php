@@ -16,26 +16,33 @@ use TCG\Voyager\Facades\Voyager;
 */
 
 Route::group(['middleware' => ['AdminCheck']], function () {
-    Route::get('users/', 'Api\TaskTwo\AdminPanelController@user');
-    Route::get('user/{id}/delete', 'Api\TaskTwo\AdminPanelController@userDelete');
-    Route::get('user/{id}/edit', 'Api\TaskTwo\AdminPanelController@userEditView');
-    Route::post('user/{id}/edit', 'Api\TaskTwo\AdminPanelController@userEdit');
-    Route::get('user/add', 'Api\TaskTwo\AdminPanelController@userAddView');
-    Route::post('user/add', 'Api\TaskTwo\AdminPanelController@userAdd');
 
-    Route::get('positions', 'Api\TaskTwo\AdminPanelController@post');
-    Route::get('positions/{id}/delete', 'Api\TaskTwo\AdminPanelController@postDelete');
-    Route::get('positions/{id}/edit', 'Api\TaskTwo\AdminPanelController@postEditView');
-    Route::post('positions/{id}/edit', 'Api\TaskTwo\AdminPanelController@postEdit');
-    Route::get('positions/add', 'Api\TaskTwo\AdminPanelController@postAddView');
-    Route::post('positions/add', 'Api\TaskTwo\AdminPanelController@postAdd');
+    Route::get('users', 'Api\TaskTwo\AdminPanelController@user')->name('users');
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('{id}/delete', 'Api\TaskTwo\AdminPanelController@userDelete');
+        Route::get('{id}/edit', 'Api\TaskTwo\AdminPanelController@userEditView');
+        Route::post('{id}/edit', 'Api\TaskTwo\AdminPanelController@userEdit');
+        Route::get('add', 'Api\TaskTwo\AdminPanelController@userAddView');
+        Route::post('add', 'Api\TaskTwo\AdminPanelController@userAdd');
+    });
 
-    Route::get('departments', 'Api\TaskTwo\AdminPanelController@otdel');
-    Route::get('department/{id}/delete', 'Api\TaskTwo\AdminPanelController@otdelDelete');
-    Route::get('department/{id}/edit', 'Api\TaskTwo\AdminPanelController@otdelEditView');
-    Route::post('department/{id}/edit', 'Api\TaskTwo\AdminPanelController@otdelEdit');
-    Route::get('department/add', 'Api\TaskTwo\AdminPanelController@otdelAddView');
-    Route::post('department/add', 'Api\TaskTwo\AdminPanelController@otdelAdd');
+    Route::get('positions', 'Api\TaskTwo\PositionController@post')->name('positions');
+    Route::group(['prefix' => 'post'], function () {
+        Route::get('{id}/delete', 'Api\TaskTwo\PositionController@postDelete');
+        Route::get('{id}/edit', 'Api\TaskTwo\PositionController@postEditView');
+        Route::post('{id}/edit', 'Api\TaskTwo\PositionController@postEdit');
+        Route::get('add', 'Api\TaskTwo\PositionController@postAddView');
+        Route::post('add', 'Api\TaskTwo\PositionController@postAdd');
+    });
+
+    Route::get('departments', 'Api\TaskTwo\DepartmenController@department')->name('departments');
+    Route::group(['prefix' => 'department'], function () {
+        Route::get('{id}/delete', 'Api\TaskTwo\DepartmenController@departmentDelete');
+        Route::get('{id}/edit', 'Api\TaskTwo\DepartmenController@departmentEditView');
+        Route::post('{id}/edit', 'Api\TaskTwo\DepartmenController@departmentEdit');
+        Route::get('add', 'Api\TaskTwo\DepartmenController@departmentAddView');
+        Route::post('add', 'Api\TaskTwo\DepartmenController@departmentAdd');
+    });
 });
 
 
