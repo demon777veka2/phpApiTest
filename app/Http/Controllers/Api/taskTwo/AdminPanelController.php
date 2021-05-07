@@ -30,6 +30,7 @@ class AdminPanelController extends Controller
             'phone' => $request['phone'] ?? '',
             'birthday' => $request['birthday'] ?? null,
             'post_id' => $request['post_id'] ?? 1,
+            'role' => $request['role'] ?? 'user',
             'password' => Hash::make($request['password']),
         ]);
 

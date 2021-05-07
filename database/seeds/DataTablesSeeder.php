@@ -32,6 +32,7 @@ class DataTablesSeeder extends Seeder
             'name' => 'user',
             'email' => 'user@mail.ru',
             'post_id' => 1,
+            'role'=>'user',
             'password' => Hash::make('user'),
         ]);
 
@@ -40,6 +41,7 @@ class DataTablesSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@mail.ru',
             'post_id' => 1,
+            'role'=>'admin',
             'password' => Hash::make('admin'),
         ]);
     }

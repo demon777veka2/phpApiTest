@@ -75,6 +75,14 @@
                     </div>
 
                     <div class="form-group help">
+                        Роль
+                        <select  class="form-control" style="width:200px;" id="role" name="role">
+                            <option>user</option>
+                            <option>admin</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group help">
                         Пароль <input type="text" class="form-control" id="password" name="password" placeholder="password" style="width:200px;">
                         <i class="fa fa-lock"></i>
                         <a href="#" class="fa fa-question-circle"></a>

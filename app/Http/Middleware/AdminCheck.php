@@ -17,17 +17,13 @@ class AdminCheck
     public function handle($request, Closure $next)
     {
         //Auth::user()->id;
-        if (empty($userId = Auth::user()->id)) {
-            return response()->json('You are not logged in'); 
+        if (empty($role = Auth::user()->role)) {
+            return response()->json('You are not logged in');
         }
 
-        if ($userId == 2)
+        if ($role == 'admin')
             return $next($request);
 
-
-         return response()->json('You are not an admin'); 
-
-        
-        
+        return response()->json('You are not an admin');
     }
 }

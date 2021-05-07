@@ -21,6 +21,7 @@
                 <td>Город</td>
                 <td>Телефон</td>
                 <td>Год рождения</td>
+                <td>Роль</td>
                 <td>Должность ID</td>
             </tr>
 
@@ -33,6 +34,7 @@
                 <td>{{$el->city}}</td>
                 <td>{{$el->phone}}</td>
                 <td>{{$el->birthday}}</td>
+                <td>{{$el->role}}</td>
                 <td>{{$el->post_id }}</td>
                 <td>
                     <a href='user/{{ $el->id }}/delete'>Удалить</a>

@@ -28,6 +28,7 @@ class RegistrationsController extends Controller
             'phone' => $request['phone'] ?? null,
             'birthday' => $request['birthday'] ?? '',
             'post_id' => $request['post_id'] ?? 1,
+            'role' => $request['role'] ?? 'user',
             'password' => Hash::make($password),
         ]);
 

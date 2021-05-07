@@ -78,6 +78,32 @@
                         <a href="#" class="fa fa-question-circle"></a>
                     </div>
 
+                    @if ($el->role == 'admin')
+                    <div class="form-group help">
+                        Роль
+                        <select class="form-control" style="width:200px;" id="role" name="role">
+                            <option>user</option>
+                            <option selected>admin</option>
+                        </select>
+                    </div>
+                    @else
+                    <div class="form-group help">
+                        Роль
+                        <select class="form-control" style="width:200px;" id="role" name="role">
+                            <option selected>user</option>
+                            <option>admin</option>
+                        </select>
+                    </div>
+                    @endif
+
+                    <div class="form-group help">
+                        Роль
+                        <select class="form-control" style="width:200px;" id="role" name="role">
+                            <option>user</option>
+                            <option>admin</option>
+                        </select>
+                    </div>
+
                     <div class="form-group help">
                         Пароль <input type="text" class="form-control" value="{{$el->password}}" id="password" name="password" placeholder="password" style="width:200px;">
                         <i class="fa fa-lock"></i>
